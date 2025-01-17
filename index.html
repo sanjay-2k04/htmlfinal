@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anbarasu Maligai</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #d9e4f5);
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, black,black);
+      color: white;
+      padding: 15px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      width: 40%;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 20px 0 0 20px;
+      outline: none;
+      font-size: 1em;
+    }
+
+    .search-bar button {
+      padding: 10px 20px;
+      background: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 0 20px 20px 0;
+      color: #007bff;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .search-bar button:hover {
+      background: #f1f1f1;
+    }
+
+    .profile {
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .profile-icon {
+      margin-right: 5px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: black;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      
+      display: none;
+      z-index: 10;
+    }
+
+    .dropdown ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dropdown ul li {
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .dropdown ul li:hover {
+      background: #007bff;
+      color: white;
+    }
+
+    .profile:hover .dropdown {
+      display: block;
+    }
+
+    .container {
+      display: flex;
+      margin: 20px;
+    }
+
+    .sidebar {
+      width: 20%;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-right: 20px;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 20px;
+      color: #007bff;
+      font-size: 1.4em;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sidebar ul li:hover {
+      background: #007bff;
+      color: white;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+
+    .carousel {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .carousel-controls button {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1.2em;
+      pointer-events: all;
+    }
+
+    .carousel-controls button:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .product .image {
+      height: 150px;
+      background: linear-gradient(135deg, #e7e7e7, #d4d4d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .note {
+      text-align: center;
+      color: red;
+    }
+
+    .product p {
+      font-size: 1em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Anbarasu Maligai</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products..." />
+      <button>🔍</button>
+    </div>
+    <div class="profile">
+      <span class="profile-icon">👱</span>
+      <div class="dropdown">
+        <ul>
+          <li>Profile</li>
+          <li>Settings</li>
+          <li href="login.html">Sign Out</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Categories (பொருட்களை)</h3>
+      <ul>
+        <li>Rice (அரிசி)</li>
+        <li>Vegetables (காய்கறிகள்)</li>
+        <li>Oils (எண்ணெய்)</li>
+        <li>Dhals (பருப்பு)</li>
+        <li>Cereals & Pulses (தானியங்கள்)</li>
+        <li>Makeup items (அலங்காரம்)</li>
+        <li>Snacks (அலங்காரம்)</li>
+        <li>Flour (மாவு)</li>
+        <li><p class="note">  Note: You should be around this area</p></li>
+
+      </ul>
+    </aside>
+      
+  
+
+    <div class="main-content">
+      <div class="carousel">
+        <div class="carousel-images" id="carousel1">
+          <img src="https://www.thegrandsiba.com/wp-content/uploads/2017/06/MG_28423-800x300.jpg" alt="Image 1">
+        </div>
+        <div class="carousel-controls">
+          <button onclick="prevSlide(1)">❮</button>
+          <button onclick="nextSlide(1)">❯</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="product">
+          <div class="image">
+            <img src="https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=" alt="Product 1" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <p>Rice</p>
+        </div>
+        <div class="product">
+          <div class="image">
+            <img src="https://media.istockphoto.com/id/480067091/photo/onion-family.jpg?s=612x612&w=0&k=20&c=1dAO45CSOCtZOI8L7fdwcZb873J_-6RE4jITSdyfM3c=" alt="Product 2" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <p>Vegetables</p>
+        </div>
+        <div class="product">
+          <div class="image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpO9aVeX7tibD_l64_AOJYhzWYQ6EGqPWVRQ&s" alt="Product 3" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <p>Dhal</p>
+        </div>
+      </div>      
+    </div>
+  </div>
+
+  <script>
+    function nextSlide(carouselNumber) {
+      const carousel = document.getElementById(`carousel${carouselNumber}`);
+      const images = carousel.children.length;
+      const currentTransform = carousel.style.transform || "translateX(0)";
+      const currentIndex = parseInt(currentTransform.match(/-?\d+/) || 0);
+      const nextIndex = (currentIndex - 100) % (images * -100);
+      carousel.style.transform = `translateX(${nextIndex}%)`;
+    }
+
+    function prevSlide(carouselNumber) {
+      const carousel = document.getElementById(`carousel${carouselNumber}`);
+      const images = carousel.children.length;
+      const currentTransform = carousel.style.transform || "translateX(0)";
+      const currentIndex = parseInt(currentTransform.match(/-?\d+/) || 0);
+      const prevIndex = (currentIndex + 100) % (images * -100);
+      carousel.style.transform = `translateX(${prevIndex}%)`;
+    }
+  </script>
+</body>
+</html>

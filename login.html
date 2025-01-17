@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="ecommerce.css">
+  <script>
+    // Temporary credentials
+    const TEMP_EMAIL = "acsanjay0001@gmail.com";
+    const TEMP_PASSWORD = "123";
+
+    function handleLogin(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the entered email and password
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Validate credentials
+      if (email === TEMP_EMAIL && password === TEMP_PASSWORD) {
+        // Redirect to home page
+        window.location.href = "home.html";
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="signup-container">
+    <img src="data:image/png;base64,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" alt="Logo" class="logo" />
+    <h2>Login to your account</h2>
+    <form class="signup-form" onsubmit="handleLogin(event)">
+      <div class="input-container">
+        <input type="email" id="email" placeholder="Email" required>
+        <span class="icon">&#9993;</span>
+      </div>
+      <div class="input-container">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="icon">&#128274;</span>
+      </div>
+      <button type="submit" class="signup-btn">Login</button>
+    </form>
+  </div>
+</body>
+</html>
